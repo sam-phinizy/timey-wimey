@@ -18,3 +18,10 @@ interval it increments by. The interval should be in the format: `integer unit` 
 2023-05-19T00:15:30.469480+00:00
 2023-05-18T23:45:30.469480+00:00
 ```
+
+
+## Instal
+
+```shell
+pipx install timey-wimey
+```
