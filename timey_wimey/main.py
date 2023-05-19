@@ -41,10 +41,10 @@ def parse_range(range_str: str):
     return number,interval_type
 
 
-def print_date(date_obj: pendulum.DateTime,format: Optional[str] = None):
+def print_date(date_obj: pendulum.DateTime, date_format: Optional[str] = None):
 
-    if format:
-        typer.echo(date_obj.strftime(format))
+    if date_format:
+        typer.echo(date_obj.strftime(date_format))
     else:
         typer.echo(date_obj)
 
@@ -54,7 +54,7 @@ def date(
     date_string: str,
     to: Optional[str] = typer.Option(None, help="An optional end time to go to."),
     time_zone: Optional[str] = typer.Option(None,help="Optional timezone to use."),
-    format: Optional[str] = typer.Option(None,help="Stftime format to use."),
+    date_format: Optional[str] = typer.Option(None, help="Stftime format to use."),
     interval: Optional[str] = typer.Option(
         "1 hours", help="Interval to use if a range. Should be like `2 days` or `37 minutes`"
     ),
@@ -71,7 +71,7 @@ def date(
         local_tz = pendulum.timezone(time_zone)
         start_date = local_tz.convert(start_date)
 
-    print_date(start_date,format)
+    print_date(start_date, date_format)
     if to is None:
         exit(0)
 
@@ -82,7 +82,7 @@ def date(
     amount,unit = parse_range(interval)
 
     for dt in period.range(unit,amount):
-        print_date(dt,format)
+        print_date(dt, date_format)
 
 if __name__ == "__main__":
     app()
